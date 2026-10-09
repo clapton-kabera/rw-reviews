@@ -1,15 +1,17 @@
 package com.kabera.rw_reviews.service;
 
-import com.kabera.rw_reviews.dto.BusinessRequest;
-import com.kabera.rw_reviews.dto.BusinessResponse;
-import com.kabera.rw_reviews.dto.RatingSummary;
-import com.kabera.rw_reviews.dto.ServiceOfferingRequest;
+import com.kabera.rw_reviews.dto.*;
 import com.kabera.rw_reviews.exception.ResourceNotFoundException;
 import com.kabera.rw_reviews.model.Business;
 import com.kabera.rw_reviews.model.ServiceOffering;
+import com.kabera.rw_reviews.model.ServiceType;
 import com.kabera.rw_reviews.repository.BusinessRepository;
 import com.kabera.rw_reviews.repository.ReviewRepository;
+import com.kabera.rw_reviews.util.PagingUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,5 +69,28 @@ public class BusinessService
         }
         return reviewRepository.summarize(ids).stream()
                 .collect(Collectors.toMap(RatingSummary::businessId, Function.identity()));
+    }
+
+    /**
+     * Paginated browse/search.
+     *
+     * @param type optional service-type filter (null = all types)
+     * @param q    optional case-insensitive name search (null/blank = no search)
+     */
+    @Transactional(readOnly = true)
+    public PageResponse<BusinessResponse> list(ServiceType type, String q, int page, int size) {
+        // Alphabetical, with id as a tie-breaker so page boundaries are stable
+        Pageable pageable = PagingUtil.of(page, size, Sort.by("name").ascending().and(Sort.by("id")));
+        String query = q == null ? "" : q.trim();
+
+        Page<Business> result = (type == null)
+                ? businessRepository.findByNameContainingIgnoreCase(query, pageable)
+                : businessRepository.findByServiceTypeAndNameContainingIgnoreCase(type, query, pageable);
+
+        // One aggregate query for the whole page, instead of one query per business
+        Map<Long, RatingSummary> summaries = summarize(
+                result.getContent().stream().map(Business::getId).toList());
+
+        return PageResponse.from(result.map(b -> BusinessResponse.from(b, summaries.get(b.getId()))));
     }
 }
