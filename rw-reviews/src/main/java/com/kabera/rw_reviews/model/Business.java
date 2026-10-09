@@ -53,4 +53,10 @@ public class Business
     @OrderBy("id")
     @BatchSize(size = 50)
     private List<ServiceOffering> services = new ArrayList<>();
+
+    /** Keeps both sides of the bidirectional relationship in sync. */
+    public void addService(ServiceOffering offering) {
+        services.add(offering);
+        offering.setBusiness(this);
+    }
 }
