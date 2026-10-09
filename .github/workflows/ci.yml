@@ -24,10 +24,12 @@ jobs:
       # Compiles, runs all unit/integration tests, and packages the jar.
       # The build fails (and the commit shows a red X) if any test fails.
       - name: Build and run tests
+        working-directory: ./rw-reviews
         run: mvn -B verify
 
       # Start the packaged jar and call it, to prove the app really boots and serves data
       - name: Smoke test the packaged app
+        working-directory: ./rw-reviews
         run: |
           java -jar target/rw-reviews-0.0.1-SNAPSHOT.jar &
           APP_PID=$!
