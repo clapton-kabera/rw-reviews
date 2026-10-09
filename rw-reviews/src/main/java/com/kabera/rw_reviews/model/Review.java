@@ -43,4 +43,13 @@ public class Review
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
+
+    public Review(Business business, String reviewerName, int rating, String comment, Instant createdAt)
+    {
+        this.business = business;
+        this.reviewerName = reviewerName;
+        this.rating = rating;
+        this.comment = comment;
+        this.createdAt = createdAt;
+    }
 }
