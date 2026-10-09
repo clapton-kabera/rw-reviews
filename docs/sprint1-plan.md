@@ -8,6 +8,7 @@ Deliver a working backend that allows users to create reviews and read reviews f
 | :-: | :--------- | :---------: | :--------------------------------: | :--: |
 | 1 | As a customer I want to be able to write reviews so that I can share my honest thoughts about the services of a certain business. | 2 | 5 | kabera |
 | 2 | As a customer I want to be able to read reviews left by other users about a certain business so that I can decide whether I can get services from that business. | 2 | 5 | kabera |
+* * *
 **Total Story Points:** 4 Story Points
 * * *
 
