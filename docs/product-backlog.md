@@ -1,8 +1,6 @@
 # Product Backlog
-* * *
 ### Description
 A prioritised list of user stories for the rwanda reviews app.
-* * *
 | # | User Story | Story Point | Priority (1 = lowest, 5 = highest) |
 | :-: | :--------- | :---------: | :--------------------------------: |
 | 1 | As a customer I want to be able to write reviews so that I can share my honest thoughts about the services of a certain business. | 2 | 5 |
@@ -14,7 +12,6 @@ A prioritised list of user stories for the rwanda reviews app.
 * * *
 
 # Acceptance Criteria
-* * *
 ### Description
 A set of criteria that each user story must meet in order to be sure that it was implemented correctly
 * * * 
@@ -38,7 +35,6 @@ A set of criteria that each user story must meet in order to be sure that it was
 * * *
 
 # Definition of Done
-* * *
 ### Description
 A checklist for any and all the user stories so that the team can know when a user story is completed.
 * * *
@@ -47,11 +43,3 @@ A checklist for any and all the user stories so that the team can know when a us
 - [ ] **Code Quality:** Code has been reviewed by at least one senior engineer.
 - [ ] **Testing:** Code passes all automated tests.
 - [ ] **Error Handling:** Code handles errors gracefully without crashing the app or producing cryptic messages for users.
-
-
-
-
-
-
-
-
