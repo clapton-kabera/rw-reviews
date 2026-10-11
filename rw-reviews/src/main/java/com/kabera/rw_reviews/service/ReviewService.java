@@ -9,6 +9,8 @@ import com.kabera.rw_reviews.model.Review;
 import com.kabera.rw_reviews.repository.BusinessRepository;
 import com.kabera.rw_reviews.repository.ReviewRepository;
 import com.kabera.rw_reviews.util.PagingUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,7 @@ import java.time.Instant;
 @Service
 public class ReviewService
 {
+    private static final Logger log = LoggerFactory.getLogger(ReviewService.class);
     private final ReviewRepository reviewRepository;
     private final BusinessRepository businessRepository;
 
@@ -42,7 +45,9 @@ public class ReviewService
                 request.comment(),
                 Instant.now());
 
-        return ReviewResponse.from(reviewRepository.save(review));
+        ReviewResponse response = ReviewResponse.from(reviewRepository.save(review));
+        log.info("Review {} created for business {} (rating={})", response.id(), businessId, response.rating());
+        return response;
     }
 
     /**
