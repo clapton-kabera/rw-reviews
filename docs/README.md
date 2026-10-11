@@ -208,8 +208,8 @@ Sprint documentation lives in [`docs/`](docs/):
 
 | Sprint | Review | Retrospective |
 |--------|--------|---------------|
-| 1: core reviews | [Sprint 1 review](docs/sprint1-review.md) | [Sprint 1 retrospective](docs/sprint1-retrospective.md) |
-| 2: logging and monitoring | [Sprint 2 review](docs/sprint2-review.md) | [Sprint 2 retrospective](docs/sprint2-retrospective.md) |
+| 1: core reviews | [Sprint 1 review](sprint1-review.md) | [Sprint 1 retrospective](sprint1-retrospective.md) |
+| 2: logging and monitoring | [Sprint 2 review](sprint2-review.md) | [Sprint 2 retrospective](sprint2-retrospective.md) |
 
 ## Backlog / ideas for later sprints
 
